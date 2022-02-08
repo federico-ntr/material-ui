@@ -77,10 +77,19 @@ The dialog has a close button added to aid usability.
 
 ## Optional sizes
 
+### Using breakpoints
+
 You can set a dialog maximum width by using the `maxWidth` enumerable in combination with the `fullWidth` boolean.
 When the `fullWidth` prop is true, the dialog will adapt based on the `maxWidth` value.
 
 {{"demo": "MaxWidthDialog.js"}}
+
+### Using custom pixel size
+
+You can set the maximum width to a custom size in pixel by passing a `sx` object to the `Dialog`'s prop `PaperProps` with `maxWidth` set to a custom number.
+Note that using a very low number can make the dialog too small to be usable.
+
+{{"demo": "CustomPixelMaxWidthDialog.js"}}
 
 ## Responsive full-screen
 
