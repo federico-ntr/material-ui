@@ -1,5 +1,5 @@
 ---
-product: material
+product: material-ui
 title: React Autocomplete（自动补全）组件
 components: TextField, Popper, Autocomplete
 githubLabel: 'component: autocomplete'
@@ -119,7 +119,7 @@ import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
 为了方便使用以及向后兼容，`useAutocomplete` hook 也在 @mui/material 中重新导出了。
 
 ```tsx
-import { createFilterOptions } from '@material-ui/core/Autocomplete';
+import useAutocomplete from '@mui/material/useAutocomplete';
 ```
 
 - 📦 [4.5kB 的压缩包](/size-snapshot)。
@@ -281,12 +281,7 @@ const filterOptions = (options, { inputValue }) => matchSorter(options, inputVal
 <Autocomplete
   onKeyDown={(event) => {
     if (event.key === 'Enter') {
-      // 阻止默认的 'Enter' 行为.
-      event.defaultMuiPrevented = true;
-      // 你的处理程序代码
-    }
-  }}
-/>
+      // Prevent's default 'Enter' behavior.
       event.defaultMuiPrevented = true;
       // your handler code
     }

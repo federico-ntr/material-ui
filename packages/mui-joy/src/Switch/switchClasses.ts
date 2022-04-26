@@ -3,13 +3,15 @@ import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
 export interface SwitchClasses {
   /** Styles applied to the root element. */
   root: string;
-  /** State class applied to the internal `SwitchBase` component's `checked` class. */
+  /** State class applied to the root `checked` class. */
   checked: string;
-  /** State class applied to the internal SwitchBase component's disabled class. */
+  /** State class applied to the root disabled class. */
   disabled: string;
-  /** Styles applied to the internal SwitchBase component's input element. */
+  /** Styles applied to the action element. */
+  action: string;
+  /** Styles applied to the input element. */
   input: string;
-  /** Styles used to create the thumb passed to the internal `SwitchBase` component `icon` prop. */
+  /** Styles Styles applied to the input element. */
   thumb: string;
   /** Styles applied to the track element. */
   track: string;
@@ -33,6 +35,12 @@ export interface SwitchClasses {
   sizeMd: string;
   /** Styles applied to the root element if `size="lg"`. */
   sizeLg: string;
+  /** Styles applied to the root element if `variant="outlined"`. */
+  variantOutlined: string;
+  /** Styles applied to the root element if `variant="light"`. */
+  variantLight: string;
+  /** Styles applied to the root element if `variant="contained"`. */
+  variantContained: string;
 }
 
 export type SwitchClassKey = keyof SwitchClasses;
@@ -45,6 +53,7 @@ const switchClasses: SwitchClasses = generateUtilityClasses('MuiSwitch', [
   'root',
   'checked',
   'disabled',
+  'action',
   'input',
   'thumb',
   'track',
@@ -58,6 +67,9 @@ const switchClasses: SwitchClasses = generateUtilityClasses('MuiSwitch', [
   'sizeSm',
   'sizeMd',
   'sizeLg',
+  'variantOutlined',
+  'variantLight',
+  'variantContained',
 ]);
 
 export default switchClasses;

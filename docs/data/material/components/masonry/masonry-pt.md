@@ -1,5 +1,5 @@
 ---
-product: material
+product: material-ui
 title: React Masonry component
 components: Masonry
 githubLabel: 'component: Masonry'
@@ -21,7 +21,7 @@ A simple example of a `Masonry`. `Masonry` is a container for one or more items.
 
 ## Image masonry
 
-This example demonstrates the use of `Masonry` for images. `Masonry` orders its children by row. If you'd like to order images by column, check out [ImageList](/components/image-list/#masonry-image-list).
+This example demonstrates the use of `Masonry` for images. `Masonry` orders its children by row. If you'd like to order images by column, check out [ImageList](/material-ui/react-image-list/#masonry-image-list).
 
 {{"demo": "ImageMasonry.js", "bg": true}}
 

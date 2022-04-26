@@ -314,7 +314,7 @@ const teamMembers: Array<Profile> = [
   {
     src: '/static/branding/about/bharat.png',
     name: 'Bharat Kashyap',
-    title: 'MUI Studio engineer',
+    title: 'MUI Toolpad engineer',
     location: 'New Delhi, India',
     locationCountry: 'in',
     about: 'Trains 🚅 , architecture 🏛️ , and psychology 🧠 ',
@@ -324,7 +324,7 @@ const teamMembers: Array<Profile> = [
   {
     src: '/static/branding/about/jan.png',
     name: 'Jan Potoms',
-    title: 'MUI Studio engineer',
+    title: 'MUI Toolpad engineer',
     location: 'Brussels, Belgium',
     locationCountry: 'be',
     about: 'Always curious, I enjoy cinema and hiking',
@@ -333,7 +333,7 @@ const teamMembers: Array<Profile> = [
   {
     src: '/static/branding/about/prakhar.png',
     name: 'Prakhar Gupta',
-    title: 'MUI Studio PM',
+    title: 'MUI Toolpad PM',
     location: 'New Delhi, India',
     locationCountry: 'in',
     about: 'Into sports and hiking!',
@@ -359,6 +359,16 @@ const teamMembers: Array<Profile> = [
     about: 'Love playing music - electric and bass guitar 🎸',
     twitter: 'iamcherniavskii',
     github: 'cherniavskii',
+  },
+  {
+    src: '/static/branding/about/sycamore.png',
+    name: 'Sam Sycamore',
+    title: 'Developer Advocate',
+    location: 'Saint Paul, Minnesota, USA',
+    locationCountry: 'us',
+    about: 'Musician and edible wild plant enthusiast 🌱',
+    twitter: 'tanoaksam',
+    github: 'samuelsycamore',
   },
 ];
 
@@ -480,7 +490,7 @@ const emeriti = [
   {
     name: 'Dmitriy Kovalenko',
     github: 'dmtrKovalenko',
-    twitter: 'dmtrKovalenko',
+    twitter: 'goose_plus_plus',
     title: 'MUI X, date pickers',
     location: 'Kharkiv, Ukraine',
     locationCountry: 'ua',
@@ -790,7 +800,7 @@ export default function About() {
     <BrandingProvider>
       <Head
         title="About us - MUI"
-        description="MUI (formerly Material-UI) started back in 2014 to unify React and Material Design. Today, MUI has grown to become one of the world's most popular React libraries – used by a vibrant community of more than 2M developers in over 180 countries."
+        description="MUI (formerly Material UI) started back in 2014 to unify React and Material Design. Today, MUI has grown to become one of the world's most popular React libraries – used by a vibrant community of more than 2M developers in over 180 countries."
       />
       <AppHeaderBanner />
       <AppHeader />

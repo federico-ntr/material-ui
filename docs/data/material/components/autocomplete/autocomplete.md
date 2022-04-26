@@ -1,5 +1,5 @@
 ---
-product: material
+product: material-ui
 title: React Autocomplete component
 components: TextField, Popper, Autocomplete
 githubLabel: 'component: autocomplete'
@@ -82,6 +82,9 @@ Set `freeSolo` to true so the textbox can contain any arbitrary value.
 The prop is designed to cover the primary use case of a **search input** with suggestions, e.g. Google search or react-autowhatever.
 
 {{"demo": "FreeSolo.js"}}
+
+> ⚠️ Be careful when using the free solo mode with non-string options, as it may cause type mismatch.  
+> The value created by typing into the textbox is always a string, regardless of the type of the options.
 
 ### Creatable
 

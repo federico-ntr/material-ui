@@ -8,14 +8,14 @@ Você pode encontrar alguns exemplos de projetos no repositório [GitHub](https:
 
 <!-- #default-branch-switch -->
 
-- [Next.js](https://github.com/mui/material-ui/tree/next/examples/nextjs) ([Versão TypeScript](https://github.com/mui/material-ui/tree/next/examples/nextjs-with-typescript))
-- [Create React App](https://github.com/mui/material-ui/tree/next/examples/create-react-app) ([versão TypeScript](https://github.com/mui/material-ui/tree/next/examples/create-react-app-with-typescript))
+- [Next.js](https://github.com/mui/material-ui/tree/master/examples/nextjs) ([TypeScript version](https://github.com/mui/material-ui/tree/master/examples/nextjs-with-typescript))
+- [Create React App](https://github.com/mui/material-ui/tree/master/examples/create-react-app) ([TypeScript version](https://github.com/mui/material-ui/tree/master/examples/create-react-app-with-typescript))
 - [Remix](https://github.com/mui/material-ui/tree/master/examples/remix-with-typescript)
 - [Gatsby](https://github.com/mui/material-ui/tree/master/examples/gatsby)
 - [Preact](https://github.com/mui/material-ui/tree/master/examples/preact)
 - [CDN](https://github.com/mui/material-ui/tree/master/examples/cdn)
 - [Plain server-side](https://github.com/mui/material-ui/tree/master/examples/ssr)
-- [Tailwind CSS](https://github.com/mui/material-ui/tree/master/examples/tailwind)
+- [Tailwind CSS](https://github.com/mui/material-ui/tree/master/examples/tailwind-css)
 - [Vite.js](https://github.com/mui/material-ui/tree/master/examples/vitejs)
 - [Use styled-components as style engine](https://github.com/mui/material-ui/tree/master/examples/create-react-app-with-styled-components) ([TypeScript version](https://github.com/mui/material-ui/tree/master/examples/create-react-app-with-styled-components-typescript))
 
@@ -74,7 +74,7 @@ If you want to start with a more complete and real-world example, you could take
 - [ScaffoldHub](https://scaffoldhub.io/?partner=1):
 
   - Crie o seu aplicativo completo com esta ferramenta online
-  - Escolha o seu framework e biblioteca (React & Material-UI!)
+  - Escolha o seu framework e biblioteca (React & Material UI!)
   - Escolha seu banco de dados (SQL, MongoDB ou Firestore)
   - Modele seu banco de dados e aplicativo com uma interface intuitiva
   - Gere sua aplicação, incluindo um scaffolded de backend completo
@@ -82,5 +82,5 @@ If you want to start with a more complete and real-world example, you could take
 
 - [Divjoy](https://divjoy.com?via=material-ui):
 
-  - Create your Material-UI app in minutes.
+  - Create your Material UI app in minutes.
   - You'll get a nice template, authentication, database integration, subscription payments, and more.

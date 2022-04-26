@@ -30,7 +30,7 @@ const theme = createTheme(
 
 {{"demo": "Locales.js"}}
 
-> ⚠️ For [`DataGrid` and `DataGridPro`](/components/data-grid/) components, they have their own [localization](/components/data-grid/localization/).
+> ⚠️ For [`DataGrid` and `DataGridPro`](/x/react-data-grid/) components, they have their own [localization](/x/react-data-grid/localization/).
 
 ### Supported locales
 
@@ -47,6 +47,7 @@ const theme = createTheme(
 | Chinese (Hong Kong)     | zh-HK               | `zhHK`      |
 | Chinese (Simplified)    | zh-CN               | `zhCN`      |
 | Chinese (Taiwan)        | zh-TW               | `zhTW`      |
+| Croatian                | hr-HR               | `hrHR`      |
 | Czech                   | cs-CZ               | `csCZ`      |
 | Danish                  | da-DK               | `daDK`      |
 | Dutch                   | nl-NL               | `nlNL`      |
@@ -66,6 +67,7 @@ const theme = createTheme(
 | Khmer                   | kh-KH               | `khKH`      |
 | Kazakh                  | kz-KZ               | `kzKZ`      |
 | Korean                  | ko-KR               | `koKR`      |
+| Macedonian              | mk-MK               | `mkMK`      |
 | Norwegian (bokmål)      | nb-NO               | `nbNO`      |
 | Persian                 | fa-IR               | `faIR`      |
 | Polish                  | pl-PL               | `plPL`      |
@@ -73,6 +75,7 @@ const theme = createTheme(
 | Portuguese (Brazil)     | pt-BR               | `ptBR`      |
 | Romanian                | ro-RO               | `roRO`      |
 | Russian                 | ru-RU               | `ruRU`      |
+| Serbian                 | sr-RS               | `srRS`      |
 | Sinhalese               | si-LK               | `siLK`      |
 | Slovak                  | sk-SK               | `skSK`      |
 | Spanish                 | es-ES               | `esES`      |
@@ -94,4 +97,4 @@ However, MUI aims to support the [100 most common](https://en.wikipedia.org/wiki
 ## RTL Support
 
 Right-to-left languages such as Arabic, Persian, or Hebrew are supported.
-Follow [this guide](/guides/right-to-left/) to use them.
+Follow [this guide](/material-ui/guides/right-to-left/) to use them.

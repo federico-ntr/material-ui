@@ -34,35 +34,39 @@ function getHeaders(markdown) {
 
   header = header[1];
 
-  let regexMatches;
-  const headers = {};
+  try {
+    let regexMatches;
+    const headers = {};
 
-  // eslint-disable-next-line no-cond-assign
-  while ((regexMatches = headerKeyValueRegExp.exec(header)) !== null) {
-    const key = regexMatches[1];
-    let value = regexMatches[2].replace(/(.*)/, '$1');
-    if (value[0] === '[') {
-      // Need double quotes to JSON parse.
-      value = value.replace(/'/g, '"');
-      // Remove the comma after the last value e.g. ["foo", "bar",] -> ["foo", "bar"].
-      value = value.replace(/,\s+\]$/g, ']');
-      headers[key] = JSON.parse(value);
-    } else {
-      // Remove trailing single quote yml escaping.
-      headers[key] = value.replace(/^'|'$/g, '');
+    // eslint-disable-next-line no-cond-assign
+    while ((regexMatches = headerKeyValueRegExp.exec(header)) !== null) {
+      const key = regexMatches[1];
+      let value = regexMatches[2].replace(/(.*)/, '$1');
+      if (value[0] === '[') {
+        // Need double quotes to JSON parse.
+        value = value.replace(/'/g, '"');
+        // Remove the comma after the last value e.g. ["foo", "bar",] -> ["foo", "bar"].
+        value = value.replace(/,\s+\]$/g, ']');
+        headers[key] = JSON.parse(value);
+      } else {
+        // Remove trailing single quote yml escaping.
+        headers[key] = value.replace(/^'|'$/g, '');
+      }
     }
-  }
 
-  if (headers.components) {
-    headers.components = headers.components
-      .split(',')
-      .map((x) => x.trim())
-      .sort();
-  } else {
-    headers.components = [];
-  }
+    if (headers.components) {
+      headers.components = headers.components
+        .split(',')
+        .map((x) => x.trim())
+        .sort();
+    } else {
+      headers.components = [];
+    }
 
-  return headers;
+    return headers;
+  } catch (err) {
+    throw new Error(`${err.message} in getHeader(markdown) with markdown: \n\n${header}`);
+  }
 }
 
 function getContents(markdown) {
@@ -211,8 +215,14 @@ function createRender(context) {
 
       let finalHref = href;
 
-      if (userLanguage !== 'en' && finalHref.indexOf('/') === 0 && finalHref !== '/size-snapshot') {
-        finalHref = `/${userLanguage}${finalHref}`;
+      if (
+        userLanguage !== 'en' &&
+        href.indexOf('/') === 0 &&
+        href !== '/size-snapshot' &&
+        // The blog is not translated
+        !href.startsWith('/blog/')
+      ) {
+        finalHref = `/${userLanguage}${href}`;
       }
 
       return `<a href="${finalHref}"${more}>${linkText}</a>`;
@@ -229,6 +239,41 @@ function createRender(context) {
       highlight: prism,
       renderer,
     };
+
+    marked.use({
+      extensions: [
+        {
+          name: 'callout',
+          level: 'block',
+          start(src) {
+            const match = src.match(/:::/);
+            return match ? match.index : undefined;
+          },
+          tokenizer(src) {
+            const rule =
+              /^ {0,3}(:{3,}(?=[^:\n]*\n)|~{3,})([^\n]*)\n(?:|([\s\S]*?)\n)(?: {0,3}\1[~:]* *(?=\n|$)|$)/;
+            const match = rule.exec(src);
+            if (match) {
+              const token = {
+                type: 'callout',
+                raw: match[0],
+                text: match[3].trim(),
+                severity: match[2],
+                tokens: [],
+              };
+              this.lexer.blockTokens(token.text, token.tokens);
+              return token;
+            }
+            return undefined;
+          },
+          renderer(token) {
+            return `<aside class="MuiCallout-root MuiCallout-${token.severity}">${this.parser.parse(
+              token.tokens,
+            )}\n</aside>`;
+          },
+        },
+      ],
+    });
 
     return marked(markdown, markedOptions);
   }
@@ -264,6 +309,9 @@ function prepareMarkdown(config) {
     if (!product) {
       return `/api/${kebabCase(component)}/`;
     }
+    if (product === 'date-pickers') {
+      return `/x/api/date-pickers/${kebabCase(component)}/`;
+    }
     if (componentPkg === 'mui-base') {
       return `/base/api/${kebabCase(component)}/`;
     }
@@ -281,16 +329,20 @@ function prepareMarkdown(config) {
       const description = headers.description || getDescription(markdown);
       const contents = getContents(markdown);
 
+      if (headers.unstyled) {
+        contents.push(`
+## Unstyled
+
+The component also comes with an [unstyled version](${headers.unstyled}). It's ideal for doing heavy customizations and minimizing bundle size.
+        `);
+      }
+
       if (headers.components.length > 0) {
         contents.push(`
 ## API
 
 ${headers.components
   .map((component) => {
-    return `- [\`<${component} />\`](/api/${kebabCase(component)}/)`;
-
-    // TODO: enable the code below once the migration is done.
-    // eslint-disable-next-line no-unreachable
     const componentPkgMap = componentPackageMapping[headers.product];
     const componentPkg = componentPkgMap ? componentPkgMap[component] : null;
     return `- [\`<${component} />\`](${resolveComponentApiUrl(

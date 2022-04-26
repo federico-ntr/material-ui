@@ -68,9 +68,11 @@ module.exports = {
             'notistack',
             '@mui/x-data-grid',
             '@mui/x-data-grid-pro',
+            '@mui/x-date-pickers',
+            '@mui/x-date-pickers-pro',
             '@mui/x-data-grid-generator',
             '@mui/x-license-pro',
-          ].includes(request);
+          ].some((dep) => request.startsWith(dep));
 
           if (hasDependencyOnRepoPackages) {
             return callback(null);
@@ -111,7 +113,7 @@ module.exports = {
           {
             test: /\.(js|mjs|jsx)$/,
             include:
-              /node_modules(\/|\\)(notistack|@mui(\/|\\)x-data-grid|@mui(\/|\\)x-data-grid-pro|@mui(\/|\\)x-license-pro|@mui(\/|\\)x-data-grid-generator)/,
+              /node_modules(\/|\\)(notistack|@mui(\/|\\)x-data-grid|@mui(\/|\\)x-data-grid-pro|@mui(\/|\\)x-license-pro|@mui(\/|\\)x-data-grid-generator|@mui(\/|\\)x-date-pickers-pro|@mui(\/|\\)x-date-pickers)/,
             use: {
               loader: 'babel-loader',
               options: {
@@ -137,7 +139,7 @@ module.exports = {
                         '@mui/material-next': '../packages/mui-material-next/src',
                         '@mui/joy': '../packages/mui-joy/src',
                       },
-                      transformFunctions: ['require'],
+                      // transformFunctions: ['require'],
                     },
                   ],
                 ],
@@ -157,7 +159,7 @@ module.exports = {
   },
   env: {
     COMMIT_REF: process.env.COMMIT_REF,
-    ENABLE_AD: process.env.ENABLE_AD,
+    ENABLE_AD_IN_DEV_MODE: process.env.ENABLE_AD_IN_DEV_MODE,
     GITHUB_AUTH: process.env.GITHUB_AUTH,
     GIT_REVIEW_ID: process.env.REVIEW_ID,
     LIB_VERSION: pkg.version,
@@ -182,6 +184,20 @@ module.exports = {
 
       pages2.forEach((page) => {
         if (process.env.PULL_REQUEST !== 'true' && page.pathname.startsWith('/experiments')) {
+          return;
+        }
+        if (
+          page.pathname.startsWith('/joy-ui') &&
+          process.env.PULL_REQUEST !== 'true' &&
+          !FEATURE_TOGGLE.enable_joy_scope
+        ) {
+          return;
+        }
+        // The blog is not translated
+        if (
+          userLanguage !== 'en' &&
+          (page.pathname === '/blog' || page.pathname.startsWith('/blog/'))
+        ) {
           return;
         }
         if (!page.children) {
@@ -239,22 +255,27 @@ module.exports = {
         },
         {
           source: '/getting-started/:path*',
-          destination: '/material/getting-started/:path*',
+          destination: '/material-ui/getting-started/:path*',
           permanent: false,
         },
         {
           source: '/customization/:path*',
-          destination: '/material/customization/:path*',
+          destination: '/material-ui/customization/:path*',
           permanent: false,
         },
         {
           source: '/guides/:path*',
-          destination: '/material/guides/:path*',
+          destination: '/material-ui/guides/:path*',
+          permanent: false,
+        },
+        {
+          source: '/experimental-api/:path*',
+          destination: '/material-ui/experimental-api/:path*',
           permanent: false,
         },
         {
           source: '/discover-more/:path*',
-          destination: '/material/discover-more/:path*',
+          destination: '/material-ui/discover-more/:path*',
           permanent: false,
         },
         {
@@ -264,17 +285,17 @@ module.exports = {
         },
         {
           source: '/components/:slug(icons|material-icons|about-the-lab|transitions|pickers)',
-          destination: '/material/:slug',
+          destination: '/material-ui/:slug',
           permanent: false,
         },
         {
           source: '/components/:path(tabs|breadcrumbs)',
-          destination: '/material/react-:path',
+          destination: '/material-ui/react-:path',
           permanent: false,
         },
         ...['checkboxes', 'switches'].map((component) => ({
           source: `/components/${component}`,
-          destination: `/material/react-${component.replace(/es$/, '')}`,
+          destination: `/material-ui/react-${component.replace(/es$/, '')}`,
           permanent: false,
         })),
         ...[
@@ -298,12 +319,12 @@ module.exports = {
           'steppers',
         ].map((component) => ({
           source: `/components/${component}`,
-          destination: `/material/react-${component.replace(/s$/, '')}`,
+          destination: `/material-ui/react-${component.replace(/s$/, '')}`,
           permanent: false,
         })),
         {
           source: '/components/:path',
-          destination: '/material/react-:path',
+          destination: '/material-ui/react-:path',
           permanent: false,
         },
         {
@@ -313,7 +334,7 @@ module.exports = {
         },
         {
           source: '/api/:path*',
-          destination: '/material/api/:path*',
+          destination: '/material-ui/api/:path*',
           permanent: false,
         },
       ];

@@ -71,7 +71,7 @@ function useUniqueId(prefix) {
 }
 
 const Root = styled('div')(({ theme }) => ({
-  marginBottom: 40,
+  marginBottom: 24,
   marginLeft: theme.spacing(-2),
   marginRight: theme.spacing(-2),
   [theme.breakpoints.up('sm')]: {
@@ -96,10 +96,10 @@ const DemoRoot = styled('div', {
     }),
     /* Make no difference between the demo and the markdown. */
     ...(bg === 'inline' && {
-      padding: theme.spacing(3),
+      padding: theme.spacing(0),
     }),
     ...(hiddenToolbar && {
-      paddingTop: theme.spacing(3),
+      paddingTop: theme.spacing(1),
     }),
   },
   /* Isolate the demo with an outline. */

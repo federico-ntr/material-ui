@@ -132,11 +132,19 @@ const ButtonBase = React.forwardRef(function ButtonBase(inProps, ref) {
     [],
   );
 
+  const [mountedState, setMountedState] = React.useState(false);
+
   React.useEffect(() => {
-    if (focusVisible && focusRipple && !disableRipple) {
+    setMountedState(true);
+  }, []);
+
+  const enableTouchRipple = mountedState && !disableRipple && !disabled;
+
+  React.useEffect(() => {
+    if (focusVisible && focusRipple && !disableRipple && mountedState) {
       rippleRef.current.pulsate();
     }
-  }, [disableRipple, focusRipple, focusVisible]);
+  }, [disableRipple, focusRipple, focusVisible, mountedState]);
 
   function useRippleHandler(rippleAction, eventCallback, skipRippleAction = disableTouchRipple) {
     return useEventCallback((event) => {
@@ -301,14 +309,6 @@ const ButtonBase = React.forwardRef(function ButtonBase(inProps, ref) {
 
   const handleOwnRef = useForkRef(focusVisibleRef, buttonRef);
   const handleRef = useForkRef(ref, handleOwnRef);
-
-  const [mountedState, setMountedState] = React.useState(false);
-
-  React.useEffect(() => {
-    setMountedState(true);
-  }, []);
-
-  const enableTouchRipple = mountedState && !disableRipple && !disabled;
 
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -519,7 +519,7 @@ ButtonBase.propTypes /* remove-proptypes */ = {
    */
   TouchRippleProps: PropTypes.object,
   /**
-   * A ref that points to the `TouchRippple` element.
+   * A ref that points to the `TouchRipple` element.
    */
   touchRippleRef: PropTypes.oneOfType([
     PropTypes.func,

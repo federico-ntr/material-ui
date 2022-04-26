@@ -25,9 +25,7 @@ const FocusStyle = styled('button')(({ theme }) => [
   {
     fontWeight: theme.vars.fontWeight.md,
     backgroundColor: theme.vars.palette.background.body,
-  },
-  {
-    '&:focus-visible': theme.focus.default,
+    [theme.focus.selector]: theme.focus.default,
   },
 ]);
 
